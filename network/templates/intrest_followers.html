@@ -1,0 +1,60 @@
+{% extends 'pageindex.html' %}
+
+{% load static %}
+
+{% block profile %}
+
+<div class='right-div-content'>
+    <div class="space" style="background-color: white;"></div>
+    {% if user.is_authenticated %}
+        <div class="suggestion-box">
+            <div class="suggestion-header">
+                followers
+            </div><br>
+      
+          
+            {% for frd in frd %}
+            {% if frd.topic.intrest_name == intrs.intrest_name %}
+            
+      
+                <div class="suggestion-user">
+                    <div>
+                        <a href="{% url 'profile' frd.following_user.id %}">
+                            <div class="small-profilepic" style="background-image: url(/media/{{frd.following_user.profile_pic}})"></div>
+                        </a>
+                    </div>
+                    <div class="user-details">
+                        <a href="">
+                            <div id="user-name">
+                                
+                                <strong>
+
+                                    <a style="text-decoration: none;" href="{% url 'profile' frd.following_user.id %}"> {{ frd.following_user.username }}</a>
+                                   
+                                </strong>
+                            </div>
+                            <!-- <div class="grey">@{{pag.username}}</div> -->
+                        </a>
+                    </div>
+                    <!-- <div>
+                        
+                        <button class="btn btn-outline-success" type="button" onclick="follow_user(this,'{{pag.pagename}}','suggestion')">Follow</button>
+                    </div> -->
+                </div>
+               
+            {% endif %}
+
+                {% endfor %}
+               
+           
+        </div>
+    
+    {% endif %}
+</div>
+
+
+{% endblock %}
+
+{% block emptyprofile %}
+   
+{% endblock %}

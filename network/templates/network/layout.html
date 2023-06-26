@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {% load temptage %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>gizshare </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="../../static/style.css">
+        <link rel="stylesheet" href="../../static/styles.css">
+        <link rel="stylesheet" href="../../static/app.css">
+        <link rel="stylesheet" href="../../static/tagsinput.css" />
+        <link rel="stylesheet" href="../../static/bootstrap.min.css">
+        <script type="text/javascript" src="../../static/layout.js"></script>
+        <script type="text/javascript" src="../../static/jquery-latest.min.js"></script>
+
+     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+            <link rel="shortcut icon" href="{% static 'Images/favicon.ico' %}">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+ <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="../../static/tagsinput.js"></script>
+
+    <!-- dropdown cdn -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+      <script src="https://kit.fontawesome.com/2810edf5c9.js" crossorigin="anonymous"></script>
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+            {% block head %}
+            {% endblock %}
+    
+    </head>
+<body class="grey-bg">
+
+  
+ 
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}"><img src="../../static/Images/logo.png" alt=""></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+         
+          <div class="collapse navbar-collapse" id="navbarScroll">
+           
+
+            
+
+        <form action="{% url 'search' %}"  class="d-flex input-group" method="GET" style="align-content: right;">
+            <div class="input-group">
+                {% if not hide_username %}
+                <input type="text" name="q" class="form-control" placeholder="search" required>
+                
+                {% endif %}
+                <div class="input-group-append">
+                    <button type="submit" style="border: none;"><span class="input-group-text" id="basic-addon2"><span class="material-symbols-outlined">
+                        search
+
+                    </span></span></button>
+                </div>
+            </div>
+        </form>
+        <div><ul style="display: flex; padding-top: 25px;">
+         
+          <li style="list-style: none; padding-left: 15px;">
+              <div class="notification">
+             <a href="{% url 'notification'  %}"><span class="material-symbols-outlined">
+              notifications
+          </span></a> 
+              {% if notifi_count != 0 %}
+          <span class="badge" id="not_count">{{notifi_count}}</span>
+              {% endif %}
+              </div>
+              <!-- <h6 style="font-size: 11px; margin-top: 2px; margin-left: -5px;">Notifications</h6> -->
+         </li>&nbsp;
+          <li style="list-style: none; padding-left: 15px; margin-left: -8px;"><div class="notification">
+              <a href="{% url 'cart' %}"><span class="material-symbols-outlined">
+                local_mall
+                </span></a>
+              <span class="badge">{{ crt_count }}</span>
+              </div>
+              <h6 style="font-size: 11px; margin-top: 2px; margin-left: 7px;"></h6></li>
+              <li style="list-style: none; padding-left: 15px; margin-left: -8px;"><div class="notification">
+                <a href="{% url 'messagess' %}">
+                  <span class="material-symbols-outlined">
+                    mail
+                    </span>
+                </div>
+                <h6 style="font-size: 11px; margin-top: 2px; margin-left: 7px;"></h6></li>
+      </ul>
+          </div>
+          
+
+
+              <div class="d-flex align-items-center nav-profile">
+
+                {% if user.user_type == 'organization' %}
+
+                <div class="nav-info">
+                    <a href="{% url 'pageprofile' user.id %}" style="text-decoration: none; color: black;">
+                    <h6 >{{user.username}} &nbsp;&nbsp;</h6></a>
+                </div>
+                <div class="nav-img">
+                    {% if user.is_authenticated %}
+                   
+                    <a href="{% url 'pageprofile' user.id %}">               
+                       
+                        <div class="nav-profilepic" style="float: left; background-image: url(/media/{{user.profile_pic}})"></div>
+                    </a>
+
+                    {% endif %}
+                </div>
+
+              {% else %}
+                <div class="nav-info">
+                  <a href="{% url 'profile' user.id %}" style="text-decoration: none; color: black;">
+                  <h6 >{{user.username}} &nbsp;&nbsp;</h6></a>
+              </div>
+              <div class="nav-img">
+                  {% if user.is_authenticated %}
+                 
+                  <a href="{% url 'profile' user.id %}">               
+                     
+                      <div class="nav-profilepic" style="float: left; background-image: url(/media/{{user.profile_pic}})"></div>
+                  </a>
+
+                  {% endif %}
+              </div>
+              {% endif %}
+                
+            </div>
+          </div>
+        </div>
+      </nav>
+
+
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-12">
+            <div class="menu-list bg-white">
+                <div class="sidenav">
+                   
+                    <div style="height: 100%;">
+                        <div>
+                            <div>
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'index' %}" class="active">
+                                            <span class="material-symbols-outlined">
+                                                home
+                                                </span>
+                                                Home
+                                        </a>
+                                    </li>
+                                    {% if user.is_authenticated %}
+                                        
+                                  {% if user.user_type == 'organization' %}
+                                        <li>
+                                            <a href="{% url 'pageprofile' user.id %}">
+                                                <span class="material-symbols-outlined">
+                                                    person
+                                                    </span>
+                                                    Profile
+                                            </a>
+                                           
+                                        </li>
+                                        {% else %}
+                                        <li>
+                                          <a href="{% url 'profile' user.id %}">
+                                              <span class="material-symbols-outlined">
+                                                  person
+                                                  </span>
+                                                  Profile
+                                          </a>
+                                         
+                                      </li>
+                                      {% endif %}
+                                       
+                                      
+                                        <li>
+                                            <a href="{% url 'wishlis' user.id %}">
+                                              <span class="material-symbols-outlined">
+                                                bookmark
+                                                </span>
+                                                    Bookmark
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'notification'  %}">
+                                                <span class="material-symbols-outlined">
+                                                    notifications
+                                                    </span>
+                                                    Notifications  
+                                                    
+                                            </a>
+                                        </li>
+                                      
+                                        <li>
+                                            <a href="{% url 'pag' user.id %}">
+                                                <span class="material-symbols-outlined">
+                                                    apps
+                                                    </span>
+                                                    Pages
+                                            </a>
+                                        </li>
+                                 
+                                        <li>
+                                            <a href="{% url 'logout' %}">
+                                                <span class="material-symbols-outlined">
+                                                    logout
+                                                    </span>
+                                                   Logout
+                                            </a>
+                                        </li>
+                                        
+                                    {% else %}
+                                    
+                                    <li>
+                                        <a href="{% url 'login' %}">
+                                            <span class="material-symbols-outlined">
+                                                login
+                                                </span>
+                                               Login
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'register' %}">
+                                            <span class="material-symbols-outlined">
+                                                app_registration
+                                                </span>
+                                               Sign In
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                           
+                        </div>
+                     
+                            
+                            {% if user.is_authenticated %}
+                                <input type="hidden" id="user_is_authenticated" value="True" data-username='{{user.username}}'>
+                            {% else %}
+                                <input type="hidden" id="user_is_authenticated" value="False">
+                            {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+
+            {% if user.is_authenticated %}
+            <div class="menu-list bg-white mt-3">
+                <div class="profile-wrapper">
+                    <div class="bg-profile"></div>
+                    <div class="profile-img">
+                        <a href="{% url 'profile' user.id %}">
+                        <div class="small-card-pic" style="float: left; background-image: url(/media/{{user.profile_pic}})"></div>
+                    </a>
+                    </div>
+                    <div class="pro-info" >
+                        <a href="{% url 'profile' user.id %}" style="text-decoration: none;color: black;">  <h2  style="margin-top: 40px;">{{user.username}} </h2></a>
+                      
+                        <p>student</p>
+                    </div>
+
+                </div>
+                <ul class="viewed-list">
+                  <li>Views of your profile <span><h6 id="count-views"></h6></span></li>
+                  <li>Views of your gizs <span>1</span></li>
+
+                </ul>
+            </div>
+            {% endif %}
+
+        </div>
+  <!-- ************************************ -->
+  <div class="popup">
+   
+    
+    <div class="large-popup">
+        <div>
+           
+            <div>
+                
+                <div class="small-profilepic" style="background-image: url(/media/{{user.profile_pic}});"></div>
+            </div>
+            <div class="form-area">
+             
+                
+
+
+<div class="form">
+    
+
+    <div class="buttons">
+        
+        <label for="chbox" class="login btn"><span>Post</span></label>
+        <label for="chbox" class="SignUp btn"><span>Sales post</span></label>&nbsp;
+       
+    </div>
+   
+    
+    <input type="checkbox" id="chbox">	
+    <div class="layer"></div>
+    <div class="layer2"></div>
+    <div class="login_form">
+
+        <form action="{% url 'user_create_post' user.id %}" method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+        <br><textarea style="border: .5px solid rgb(3, 141, 175);" name="text" autofocus placeholder="Post Name..." rows="5" id="post-text"></textarea>
+        <input type="hidden" id="img-change" value="false"></input>
+      
+        <div class="form-action-btns">
+            <div>
+                <input type="file" name="picture" class="form-control"  id="cover"  >
+                <label for="insert-img" class="icon-btn form-icon-btn"> image/video/pdf
+                  
+                </label>
+            </div>
+            <br>
+            <div>
+     
+                <button type="submit" class="btn btn-success float-right submit-btn" value="&nbsp;Post&nbsp;" >post</button>
+            </div>
+        </div><br>
+      
+        <div >
+      <input hidden name="status" value="nsale" >
+    </div>
+        </form>
+        
+    </div>
+
+    <div class="SignUp_form">
+        <form action="{% url 'user_create_post' user.id %}" method="POST" class="newpost container" enctype="multipart/form-data">
+            {% csrf_token %}
+        <br><textarea style="border: .5px solid rgb(3, 141, 175);" class="form-control" name="text" autofocus placeholder="Post Name..." rows="5" id="post-text"></textarea>
+        <input type="hidden" id="img-change" value="false"></input>
+        <div id='img-div'>
+            <button id="del-img" type='button'>
+                <svg width="1.55em" height="1.55em" viewBox="0 0 24 24" class="r-jwli3a r-4qtqp9 r-yyyyoo r-1q142lx r-50lct3 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue" fill="#fff">
+                    <g><path d="M13.414 12l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L12 10.586 6.207 4.793c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L10.586 12l-5.793 5.793c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L12 13.414l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L13.414 12z"></path></g>
+                </svg>
+            </button>
+            <img src="{% static 'Images/spinner.gif' %}" id='spinner' height="70px">
+        </div>        
+        <div class="form-action-btns">
+            <div class="form-group">
+                <input type="file" name="picture" class="form-control"  id="cover"  required >
+                <label for="insert-img" class="icon-btn form-icon-btn"> image/video/pdf
+                  
+                </label>
+            </div>
+            <div>                
+                <input type="submit" class="btn btn-success float-right submit-btn" value="&nbsp;Post&nbsp;" >
+            </div>
+        </div><br>
+        <div>
+        <input type="text" name="Product_Price" placeholder="price" class="form-control" required>
+    </div>
+        <!-- <input type="text" placeholder="Qty"><br> -->
+        <div>
+            <input hidden name="status" value="sale">
+        </div>
+        
+    </form>
+    </div>
+
+</div>
+<a href="" style=" text-decoration: none;font-size: 20px; font-weight: 600; " onclick="remove_popup()">X</a>
+            </div> 
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ******************************************* -->
+{% for post in posts %}
+    
+    <div class="modal" id="shareModal{{ post.id }}">
+      
+      <div class="modal-contented">
+       
+        <span class="close">&times;</span>
+        
+        <div class="social-icons">
+
+          <div class="social-icons">
+
+            <div class="sales-share" style="display: flex;">
+              <a href="" class="icon facebook facebook-btn" onclick="shareOnFacebook(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="icon twitter twitter-btn" onclick="shareOnTwitter(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="icon linkedin linkedin-btn" onclick="shareOnLinkedIn(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-linkedin"></i></a>
+              <a href="#" class="icon Whatsapp whatsapp-btn" onclick="shareOnWhatsApp(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-whatsapp"></i></a>
+            </div>
+  
+          </div>
+
+        </div>
+      
+        <label for="urlInput{{ post.id }}">share to someone</label>
+        <input type="text" id="urlInput{{ post.id }}" value="" readonly>
+        <button class="copy-btn" id="copyBtn{{ post.id }}">Copy URL</button>
+      </div>
+    </div>
+{% endfor %}
+
+  <!-- filter -->
+
+  <div class="modal modal-lg fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Filter</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="filter-flex">
+                
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Radio2" {% if index_posts == 1  %}checked{% endif %}>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Following Topics
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="Radio3" {% if user_posts == 1  %}checked{% endif %}>
+                    <label class="form-check-label" for="flexRadioDefault3">
+                      Following User posts
+                    </label>
+                  </div>
+            </div>
+            
+
+            <div id="RadioDefault2" style="display:none;">
+                <div class="container2">
+                  <ul class="cbox-tags2">
+                    {% for interest in interest_list %}
+                    <li>
+                        <input type="checkbox"  value="{{ intr.intrest_name }}">
+                        <label for="checkbox{{ intr.id }}">
+                          
+                         
+                          {% if interest.is_following %}
+                            <a href="{% url 'filter_intrest_unfollow' interest.id %}" class="btn btn-primary" style="background-color: rgb(80, 147, 185);border-radius: 15px;border-color: rgb(80, 147, 185);"> * {{ interest.name }}</a>
+
+                          {% else %}  
+                          <a class="" href="{% url 'filter_intrest_follow' interest.id %}" style="text-decoration: none;color: black;"> * {{ interest.name }}</a>
+                          {% endif %}
+                           
+                           
+                        </label>
+                    </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                    {% endfor %}
+                </ul>
+                <div class="modal-footer">
+                  <button class="btn btn-primary"><a href="{% url 'index' %} " style="color: white;text-decoration: none;">Apply</a></button>
+                </div>
+                  </div>
+                
+                </div>
+
+
+                <div id="RadioDefault3" style="display:none;">
+                    <div class="container3">
+                        <ul>
+                           
+                        </ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"><a href="{% url 'user_posts' %} " style="color: white;text-decoration: none;">Apply</a></button>
+                      </div>
+                    </div>
+
+
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+
+  
+
+
+
+
+
+<div class="col-lg-6 col-md-6 col-12">
+  <div class="scroll-page">
+    <div class="create-post bg-white">
+        <div class="form-group">
+          {% if not user.user_type == 'organization' %}
+            <a style="text-decoration: none; " href="{% url 'create_post' user.id %}">
+              {% else %}
+              <a style="text-decoration: none;" href="{% url 'page_createpost' user.id %}">
+              {% endif %}
+          <input type="text" class="form-control" placeholder="create new giz..." readonly></a>
+        </div>
+        {% if user.is_authenticated %}
+     
+        <ul>
+            <li>
+                <button style="border-color: aliceblue;border-radius: 7px;"  >
+                  {% if not user.user_type == 'organization' %}
+            <a style="text-decoration: none; " href="{% url 'create_post' user.id %}">
+              {% else %}
+              <a style="text-decoration: none;" href="{% url 'page_createpost' user.id %}">
+              {% endif %}
+                    <span class="material-symbols-outlined">
+                        description
+                    </span>
+                </a></button>
+            </li>
+            <li>
+                <button style="border-color: aliceblue;border-radius: 7px; " >
+                <a style="text-decoration: none;" href="#">
+                    <span class="material-symbols-outlined">
+                        videocam
+                    </span>
+                </a></button>
+
+            </li>
+            <li>
+                <button style="border-color: aliceblue;border-radius: 7px;" >
+                <a style="text-decoration: none;" href="#">
+                    <span class="material-symbols-outlined">
+                        add_a_photo
+                    </span>
+                </a>
+            </button>
+            </li>
+        </ul>
+    {% endif %}
+
+      </div>
+      
+
+      {% if index_posts == 1 %}
+
+      <div class="filter-wrapper" style="margin-top: 10px; padding-left: 20px;" >
+        <h4 >giz feed</h4>
+
+        <ul>
+            <li>
+                <div class="dropdown">
+                    <button class="d-flex align-items-center   btn btn-secondary" type="button"  data-bs-target="#exampleModalToggle1" data-bs-toggle="modal">
+                        <span class="material-symbols-outlined">
+                            tune
+                            </span>
+                            Filter
+                    </button>
+                    
+                  </div>
+               
+            </li>
+
+            
+            <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="filter-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          sort
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="filter-dropdown">
+                          <form action="{% url 'index' %}" method="POST">
+                            {% csrf_token %}
+                            <button class="dropdown-item" type="submit" name="dropdown" value="best">Best</button>
+                            <button class="dropdown-item" type="submit" name="dropdown" value="new">New</button>
+                            <button class="dropdown-item" type="submit" name="dropdown" value="top">Top</button>
+                            
+                        </form>
+
+
+                        </div>
+                      </div>
+            </li>
+            
+        </ul>
+    </div>
+
+      {% endif %}
+
+      {% if user_posts == 1 %}
+      <div class="filter-wrapper" style="margin-top: 10px; padding-left: 20px;" >
+        <h4 >giz feed</h4>
+
+        <ul>
+            <li>
+                <div class="dropdown">
+                    <button class="d-flex align-items-center   btn btn-secondary" type="button"  data-bs-target="#exampleModalToggle1" data-bs-toggle="modal">
+                        <span class="material-symbols-outlined">
+                            tune
+                            </span>
+                            Filter
+                    </button>
+                    
+                  </div>
+               
+            </li>
+
+            
+            <li>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="filter-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          sort
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="filter-dropdown">
+                          <form action="{% url 'user_posts' %}" method="POST">
+                            {% csrf_token %}
+                            <button class="dropdown-item" type="submit" name="dropdown" value="best">Best</button>
+                            <button class="dropdown-item" type="submit" name="dropdown" value="new">New</button>
+                            <button class="dropdown-item" type="submit" name="dropdown" value="top">Top</button>
+                            
+                        </form>
+
+
+                        </div>
+                      </div>
+            </li>
+            
+        </ul>
+    </div>
+    {% endif %}
+
+
+
+      
+      <!-- <div style="display: flex; margin-top: 20px; ">
+           <h5 style="margin-left: 10px;">gizs feed</h5>
+
+
+           
+           
+           <div class="best-down" style="width:120px; margin-left: 380px;  border-radius: 10px; ">
+            <select>
+              <option value="0" >best</option>
+              <option value="1"> best</option>
+              <option value="2">hot</option>
+              <option value="3">new</option>
+              <option value="3">top</option>
+            
+            </select>
+          </div> 
+
+
+      </div>  -->
+
+
+
+
+      <div class="post-wrapper bg-white">
+
+        {% block body %}
+    
+        {% endblock %}
+    </div>
+</div>
+</div>
+<div class="modal modal-lg fade" id="purchasePop" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Purchase</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+         <div class="row">
+          <div class="col-md-6">
+              <h5>Billing Address</h5>
+              
+              <form action="">
+                  <div class="form-group">
+                      <label for="">Name</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+                  <div class="form-group">
+                      <label for="">Address</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+                  <div class="form-group">
+                      <label for="">City</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+                  <div class="form-group">
+                      <label for="">State</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+                  <div class="form-group">
+                      <label for="">Country</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+                  <div class="form-group">
+                      <label for="">Zip code</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+                  <div class="form-group">
+                      <label for="">GSTIN ( Optional )</label>
+                      <input type="text" class="form-control" placeholder="" name="" id="">
+                  </div>
+              </form>
+          </div>
+
+          
+           
+
+          
+
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Purchase now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="col-lg-3 col-md-3 col-12">
+    <div class="feed-list bg-white" style="height: 320px;  overflow-y: scroll;">
+
+      <h4> Intrested Topics<span class="material-symbols-outlined"></span> <span class="material-symbols-outlined">
+        info
+        </span></h4>
+ 
+<!-- <div style="margin-top: -10px;">
+      <form method="GET">
+        <div class="search">
+          <button type="submit"><span class="fa fa-search"></span></button>
+          <input class="outline" type="text" name="search" placeholder="topics">
+        </div>
+      </form>
+    </div>  -->
+            
+        
+            {% if search %}
+                
+                <ul >
+                    {% for suggestion in search_results %}
+                        {% if not suggestion.is_staff %}
+                            {% if suggestion.username != frd.to %}
+                                <li>
+                                    <div class="feed-wrapper">
+                                        <div class="feed-img">
+                                            <a href="{% url 'profile' suggestion.id %}">
+                                                <div class="feed-profilepic" style="background-image: url(/media/{{suggestion.profile_pic}})"></div>
+                                            </a>
+                                        </div>
+                                        <div style="margin-left: 25px;" class="feed-info mr-auto">
+                                            <a style="text-decoration: none; color: black;" href="{% url 'profile' suggestion.id %}"><h6>{{suggestion.username}}</h6></a>
+                                            <p>student</p>
+                                        </div>
+                                        <div>
+                                            <a href="{% url 'sent_friend_request' suggestion.id %}" type="submit" style="text-decoration: none; color: black;"><span class="material-symbols-outlined">add</span></a>
+                                        </div> 
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            <div   >
+              <button onclick="updateCounts('24hours')">Last 24 Hours</button>
+              <button onclick="updateCounts('1week')">Last 1 Week</button>
+              <button onclick="updateCounts('1month')">Last 1 Month</button>
+            </div>
+          
+            <ul class="post-list" style="margin-top: 20px;" data-filter="counts">
+              {% for choose in choose %}
+                  {% if request.user == choose.following_user %}
+                      <li>
+                          <div class="feed-wrapper">
+                              <div style="margin-left: 25px;" class="feed-info mr-auto">
+                                  <a style="text-decoration: none; color: black;" href="{% url 'topicpage' choose.topic.id %}"><h6>{{ choose.topic.intrest_name }}</h6></a>
+                              </div>
+                              <div>
+                                  <h6><a href="{% url 'topicpage' choose.topic.id %}" style="text-decoration: none; color: black;">
+                                      <span class="counts" data-counts="{{ choose.topic.id|counts }}">{{ choose.topic.id|counts }}</span>
+                                  </a></h6>
+                              </div> 
+                          </div>
+                      </li>   
+                  {% endif %}
+              {% endfor %}
+          </ul>
+      
+          <ul class="post-list" style="margin-top: 20px;" data-filter="week-counts">
+              {% for choose in choose %}
+                  {% if request.user == choose.following_user %}
+                      <li>
+                          <div class="feed-wrapper">
+                              <div style="margin-left: 25px;" class="feed-info mr-auto">
+                                  <a style="text-decoration: none; color: black;" href="{% url 'topicpage' choose.topic.id %}"><h6>{{ choose.topic.intrest_name }}</h6></a>
+                              </div>
+                              <div>
+                                  <h6><a href="{% url 'topicpage' choose.topic.id %}" style="text-decoration: none; color: black;">
+                                      <span class="week-counts" data-week-counts="{{ choose.topic.id|week_counts }}">{{ choose.topic.id|week_counts }}</span>
+                                  </a></h6>
+                              </div> 
+                          </div>
+                      </li>   
+                  {% endif %}
+              {% endfor %}
+          </ul>
+      
+      
+          <ul class="post-list" style="margin-top: 20px;" data-filter="month-counts">
+            {% for choose in choose %}
+                {% if request.user == choose.following_user %}
+                    <li>
+                        <div class="feed-wrapper">
+                            <div style="margin-left: 25px;" class="feed-info mr-auto">
+                                <a style="text-decoration: none; color: black;" href="{% url 'topicpage' choose.topic.id %}"><h6>{{choose.topic.intrest_name }}</h6></a>
+                                </div>
+                                <div>
+                                    <h6><a href="{% url 'topicpage' choose.topic.id %}" style="text-decoration: none; color: black;">
+                                        <span class="month-counts" data-month-counts="{{ choose.topic.id|month_counts }}">{{ choose.topic.id|month_counts }}</span>
+                                    </a></h6>
+                                </div> 
+                            </div>
+                        </li>   
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+
+                    </div>
+                    <div class="feed-list bg-white" style="height: 320px;  overflow-y: scroll;">
+                        <h4> Suggested Topics<span class="material-symbols-outlined"></span> <span class="material-symbols-outlined">
+                          info
+                          </span></h4>
+                          <br>
+                     
+                
+                        <ul>
+                            {% for intrests in intrests %}
+                                <li>
+                                    <div class="feed-wrapper">
+                                       
+                                        <div  class="feed-info mr-auto">
+                                            <a style="text-decoration:none; color: black;"  href="{% url 'topicpage' intrests.id %}">
+                                            <h6 style="text-decoration:none; color: black;" >{{intrests.intrest_name}}</h6>
+                                        </a>
+                                            <p></p>
+                                        </div>
+                                        <div>
+                                           
+                                               <h6> <a  href="{% url 'topicpage' intrests.id %}"  style="text-decoration: none; color: black;">
+                                                  <!-- <span class="material-symbols-outlined" >
+                                                  add
+                                              </span> -->
+                                              {{intrests.id| counts}} giz
+                                            </a></h6>
+                                        </div> 
+                                        
+                                    </div>
+                                </li>
+                             {% endfor %}
+                         </ul>
+                    </div>
+                </div>
+</div>
+</div>
+
+</div>
+
+<script src="../../static/bootstrap.min.js"></script>
+
+<script>
+    const count = document.getElementById("count-views");
+
+incrementVisitsCount();
+
+function incrementVisitsCount() {
+    let visits;
+
+    if (!localStorage.getItem("visits")) localStorage.setItem("visits", 1);
+    else {
+        visits = +localStorage.getItem("visits");
+        const incrementedCount = visits + 1;
+
+        localStorage.setItem("visits", incrementedCount);
+    }
+
+    count.innerText = localStorage.getItem("visits");
+}
+
+$(function(){
+		$(".checkme").click(function(event) {
+			var x = $(this).is(':checked');
+			if (x == true) {
+				$(this).parents(".checkbox-card").find('.passport-box').show();
+				$(this).parents(".checkbox-card").find('.apply-box').hide();
+			}
+			else{
+				$(this).parents(".checkbox-card").find('.passport-box').hide();
+				$(this).parents(".checkbox-card").find('.apply-box').show();
+			}
+		});
+	})
+
+
+
+    <script>
+			$(document).ready(function($) {
+				$(".sel").click(function() {
+					window.document.location = $(this).data("href");
+				});
+			});
+		</script>
+
+
+
+    
+
+
+</script>
+<script>
+    var x, i, j, l, ll, selElmnt, a, b, c;
+
+x = document.getElementsByClassName("best-down");
+l = x.length;
+for (i = 0; i < l; i++) {
+selElmnt = x[i].getElementsByTagName("select")[0];
+ll = selElmnt.length;
+/* For each element, create a new DIV that will act as the selected item: */
+a = document.createElement("DIV");
+a.setAttribute("class", "select-selected");
+a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+x[i].appendChild(a);
+/* For each element, create a new DIV that will contain the option list: */
+b = document.createElement("DIV");
+b.setAttribute("class", "select-items select-hide");
+for (j = 1; j < ll; j++) {
+/* For each option in the original select element,
+create a new DIV that will act as an option item: */
+c = document.createElement("DIV");
+c.innerHTML = selElmnt.options[j].innerHTML;
+c.addEventListener("click", function(e) {
+    /* When an item is clicked, update the original select box,
+    and the selected item: */
+    var y, i, k, s, h, sl, yl;
+    s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+    sl = s.length;
+    h = this.parentNode.previousSibling;
+    for (i = 0; i < sl; i++) {
+      if (s.options[i].innerHTML == this.innerHTML) {
+        s.selectedIndex = i;
+        h.innerHTML = this.innerHTML;
+        y = this.parentNode.getElementsByClassName("same-as-selected");
+        yl = y.length;
+        for (k = 0; k < yl; k++) {
+          y[k].removeAttribute("class");
+        }
+        this.setAttribute("class", "same-as-selected");
+        break;
+      }
+    }
+    h.click();
+});
+b.appendChild(c);
+}
+x[i].appendChild(b);
+a.addEventListener("click", function(e) {
+/* When the select box is clicked, close any other select boxes,
+and open/close the current select box: */
+e.stopPropagation();
+closeAllSelect(this);
+this.nextSibling.classList.toggle("select-hide");
+this.classList.toggle("select-arrow-active");
+});
+}
+
+function closeAllSelect(elmnt) {
+/* A function that will close all select boxes in the document,
+except the current select box: */
+var x, y, i, xl, yl, arrNo = [];
+x = document.getElementsByClassName("select-items");
+y = document.getElementsByClassName("select-selected");
+xl = x.length;
+yl = y.length;
+for (i = 0; i < yl; i++) {
+if (elmnt == y[i]) {
+  arrNo.push(i)
+} else {
+  y[i].classList.remove("select-arrow-active");
+}
+}
+for (i = 0; i < xl; i++) {
+if (arrNo.indexOf(i)) {
+  x[i].classList.add("select-hide");
+}
+}
+}
+
+/* If the user clicks anywhere outside the select box,
+then close all select boxes: */
+document.addEventListener("click", closeAllSelect);
+  </script>
+
+
+<script>
+
+var Radio2Radio = document.querySelector('input[value="Radio2"]');
+var Radio3Radio = document.querySelector('input[value="Radio3"]');
+var Radio2Details = document.getElementById('RadioDefault2');
+var Radio3Details = document.getElementById('RadioDefault3');
+
+var checkedRadio = document.getElementById("flexRadioDefault2");
+var checkedRadio = document.getElementById("flexRadioDefault3");
+  
+  if (flexRadioDefault2.checked) {
+    Radio2Details.style.display = "block";
+    Radio3Details.style.display = "none";
+  }
+  if (flexRadioDefault3.checked) {
+    Radio2Details.style.display = "none";
+    Radio3Details.style.display = "block";
+  }
+
+
+// Radio3Details.style.display = "none";
+
+
+
+Radio2Radio.addEventListener('change', function() {
+  Radio2Details.style.display = "block";
+  Radio3Details.style.display = "none";
+});
+
+Radio3Radio.addEventListener('change', function() {
+  Radio2Details.style.display = "none";
+  Radio3Details.style.display = "block";
+});
+</script>
+<script>
+  function openModal(postId) {
+  // Get the corresponding modal popup
+  var modal = document.getElementById("shareModal" + postId);
+
+  // Get the <span> element that closes the modal popup
+  var span = modal.querySelector(".close");
+
+  // Get the URL input element and copy button
+  var urlInput = modal.querySelector("#urlInput" + postId);
+  var copyBtn = modal.querySelector("#copyBtn" + postId);
+
+  // Set the URL value
+  urlInput.value = "http://gizshare.waywedesign.in/post_comment/" + postId;
+
+  // When the user clicks the share button, open the modal popup
+  modal.style.display = "block";
+
+  // When the user clicks the close button, close the modal popup
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal popup, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // When the user clicks the copy button, copy the URL to clipboard
+  copyBtn.onclick = function() {
+    // Select the URL input text
+    urlInput.select();
+    urlInput.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the URL to clipboard
+    document.execCommand("copy");
+
+    // Change the copy button text to "Copied!"
+    copyBtn.innerHTML = "Copied!";
+  }
+}
+
+ </script>
+   <script>
+    function shareOnFacebook(event, postUrl) {
+      event.preventDefault();
+      const postTitle = encodeURI("Hi everyone, please check this out: ");
+      const url = `https://www.facebook.com/sharer.php?u=${postUrl}&quote=${postTitle}`;
+      window.open(url, "_blank");
+    }
+  
+    function shareOnTwitter(event, postUrl) {
+      event.preventDefault();
+      const postTitle = encodeURI("Hi everyone, please check this out: ");
+      const url = `https://twitter.com/share?url=${postUrl}&text=${postTitle}`;
+      window.open(url, "_blank");
+    }
+  
+    function shareOnLinkedIn(event, postUrl) {
+      event.preventDefault();
+      const postTitle = encodeURI("Hi everyone, please check this out: ");
+      const url = `https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`;
+      window.open(url, "_blank");
+    }
+  
+    function shareOnWhatsApp(event, postUrl) {
+      event.preventDefault();
+      const postTitle = encodeURI("Hi everyone, please check this out: ");
+      const url = `https://wa.me/?text=${postTitle} ${postUrl}`;
+      window.open(url, "_blank");
+    }
+  </script>
+  <script>
+    function updateCounts(filter) {
+        var filterValue = '';
+        
+        if (filter === '24hours') {
+            filterValue = 'counts';
+        } else if (filter === '1week') {
+            filterValue = 'week-counts';
+        } else if (filter === '1month') {
+            filterValue = 'month-counts';
+        }
+        
+        var allLists = document.getElementsByClassName('post-list');
+        for (var i = 0; i < allLists.length; i++) {
+            if (allLists[i].getAttribute('data-filter') === filterValue) {
+                allLists[i].style.display = 'block';
+            } else {
+                allLists[i].style.display = 'none';
+            }
+        }
+    }
+    
+    // Initially, set the filter to "Last 24 Hours"
+    updateCounts('24hours');
+</script>
+
+
+</body>
+
+
+
+</html>

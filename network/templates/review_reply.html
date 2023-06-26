@@ -1,0 +1,133 @@
+{% extends 'pageindex.html' %}
+
+{% load static %}
+
+{% block profile %}
+
+{% for message in messages %}
+<b><span class="star"><small style="color: rgb(52, 129, 201);">{{message}}</small></span></b>
+{% endfor %}
+<div>
+
+</div><br><br>
+
+
+
+
+
+
+<div  style="border: none;">
+			  
+    <div class="">
+   <div class="row">
+     <div class="col-md-12">
+       <!-- <h3 class="text-center mb-5">
+         Nested comment section
+       </h3> -->
+       <div class="row">
+         <div class="col-md-12">
+
+
+
+           <div class="media">
+             <!-- <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" /> -->
+             <div class="media-body">
+               <div class="row">
+                <div class="col-8 d-flex">
+                    <div class="small-profilepic" style="background-image: url(/media/{{rev.reviewer.profile_pic}})"></div>
+                   <h5>{{ rev.reviewer.username }}</h5>&nbsp;&nbsp;&nbsp;
+                 <span>{{ rev.review_time }}</span>
+                </div>
+                
+                <div class="col-4">
+                
+                <div class="pull-right reply">
+                
+             
+                
+                </div>
+                
+                </div>
+               </div>		
+               <div class="col-8 d-flex" style="padding-left: 50px;">   {{ rev.reviewz }}</div>
+               <form action="{% url 'reply' rev.id  %}" method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="d-flex " style="margin-top: 15px;">
+        <input placeholder="write a reply..." name="reply_text" class="form-control"  >&nbsp;&nbsp;
+        <button style="border: .5px solid rgb(241, 236, 236); border-radius: 5px;"> <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#666565  " class="bi bi-send-fill" viewBox="0 0 16 16">
+            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+          </svg></button>
+       
+    </div>
+       </form>
+                                    <br> <br> 
+
+                                 {% for reply in reply %}   
+                                 {% if reply.reviews.reviewz == rev.reviewz %}
+               <div class="media mt-4">
+                  <a class="pr-5" href="#"></a>
+                 <div class="media-body">
+                     
+                   <div class="row">
+                <div class="col-12 d-flex">
+                    <div class="small-profilepic" style="background-image: url(/media/{{reply.replier.profile_pic}})"></div>
+                   <h5>{{ reply.replier }}</h5>&nbsp;&nbsp;&nbsp;
+                 <span>{{ reply.reply_time }}</span>
+                </div>
+                
+               
+               </div>
+               <div class="col-8 d-flex" style="padding-left: 50px;"> 
+                  {{ reply.reply_text }}
+               </div>
+               {% if user.username == reply.replier.username %}
+               <div class="review-o u-s-m-b-15 col-12 d-flex" style="padding-left: 40px;">
+              <a href="{% url 'reply_delete' reply.id reply.reviews.id %}"><span class="review-o__date">delete</span></a> 
+               </div>
+               {% endif %}
+                 </div>
+               </div>
+               {% endif %}
+               {% endfor %}
+               <!-- <div class="media mt-3">
+                  <a class="pr-5" href="#"></a>
+                 <div class="media-body">
+                     <div class="row">
+                <div class="col-12 d-flex">
+                   <h5>John Smith</h5>
+                 <span>- 4 hours ago</span>
+                </div>
+                
+               
+               </div>
+               
+                   the majority have suffered alteration in some form, by injected humour, or randomised words.
+                                             
+                 </div>
+               </div> -->
+             </div>
+           </div>
+           
+           
+           
+     
+           
+         </div>
+       </div>
+     </div>
+   </div>
+   </div>
+ </div>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block emptyprofile %}
+   
+{% endblock %}

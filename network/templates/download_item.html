@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    {% load static %}
+
+   
+    <meta charset="UTF-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
+    <title>gishare</title>
+
+    <!--====== Google Font ======-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+
+    <!--====== Vendor Css ======-->
+    <link rel="stylesheet" href="{% static 'vendor.css' %}">
+
+    <!--====== Utility-Spacing ======-->
+    <link rel="stylesheet" href="{% static 'utility.css' %}">
+
+    <!--====== App ======-->
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    
+<link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+   
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/2810edf5c9.js" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: #eeeeee;">
+    
+
+    <!--====== Main App ======-->
+    <div id="app" style="background-color: #eeeeee;" >
+        <div class="container" >
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #fff;" >
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'index' %}"><img src="../../static/Images/logo.png" alt=""></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+             
+              <div class="collapse navbar-collapse" id="navbarScroll">
+    
+            <form action="{% url 'search' %}"  class="d-flex input-group" method="GET" style="align-content: right;">
+                <div class="input-group">
+                    {% if not hide_username %}
+                    <input type="text" name="q" class="form-control" placeholder="search">
+                    
+                    {% endif %}
+                    <div class="input-group-append">
+                        <button type="submit" style="border: none;"><span class="input-group-text" id="basic-addon2"><span class="material-symbols-outlined">
+                            search
+    
+                        </span></span></button>
+                    </div>
+                </div>
+            </form>
+            <div><ul style="display: flex; padding-top: 25px;">
+         
+                <li style="list-style: none; padding-left: 15px;">
+                    <div class="notification">
+                   <a href="{% url 'notification' %}"><span class="material-symbols-outlined">
+                    notifications
+                </span></a> 
+                    
+                    <span class="badge">{{ invc }}</span>
+                    
+                    </div>
+                    <!-- <h6 style="font-size: 11px; margin-top: 2px; margin-left: -5px;">Notifications</h6> -->
+               </li>&nbsp;
+                <li style="list-style: none; padding-left: 15px; margin-left: -8px;"><div class="notification">
+                    <a href="{% url 'cart' %}"><span class="material-symbols-outlined">
+                      local_mall
+                      </span></a>
+                    <span class="badge">{{ crt_count }}</span>
+                    </div>
+                    <h6 style="font-size: 11px; margin-top: 2px; margin-left: 7px;"></h6></li>
+            </ul>
+                </div>
+              
+    
+    
+                  <div class="d-flex align-items-center nav-profile">
+    
+                    <div class="nav-info">
+                        <a href="{% url 'profile' user.id %}" style="text-decoration: none; color: black;">
+                        <h6 >{{user.username}} &nbsp;&nbsp;</h6></a>
+                    </div>
+                    <div class="nav-img">
+                        {% if user.is_authenticated %}
+                       
+                        <a href="{% url 'profile' user.id %}">               
+                           
+                            <div class="nav-profilepic" style="float: left; background-image: url(../media/{{user.profile_pic}})"></div>
+                        </a>
+    
+                        {% endif %}
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+          </nav>
+
+       <!-- <center><h1 style="color: #17bf63; font-size: 60px; border: 1px solid red;">PRODUCT DETAILS</h1></center> -->
+       
+<!-- *****************modal share***********************-->
+
+
+
+    
+    <div class="modal" id="shareModal{{ post.id }}">
+      
+      <div class="modal-contented">
+       
+        <span class="close">&times;</span>
+        
+        <div class="social-icons">
+
+          <div class="sales-share" style="display: flex;">
+            <a href="" class="icon facebook facebook-btn" onclick="shareOnFacebook(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="icon twitter twitter-btn" onclick="shareOnTwitter(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="icon linkedin linkedin-btn" onclick="shareOnLinkedIn(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-linkedin"></i></a>
+            <a href="#" class="icon Whatsapp whatsapp-btn" onclick="shareOnWhatsApp(event, 'http://gizshare.waywedesign.in/post_comment/{{ post.id }}');"><i class="fa fa-whatsapp"></i></a>
+          </div>
+
+        </div>
+      
+        <label for="urlInput{{ post.id }}">share to someone</label>
+        <input type="text" id="urlInput{{ post.id }}" value="" readonly>
+        <button class="copy-btn" id="copyBtn{{ post.id }}">Copy URL</button>
+      </div>
+    </div>
+
+
+
+<!-- **************************************************** -->
+
+        <!--====== App Content ======-->
+        <div class="app-content" style="background-color: #fff; border-radius: 20px ;">
+            <div class="scroll-page">
+            <!--====== Section 1 ======-->
+          
+            {% for i in pro %}
+            <div class="u-s-p-t-90" >
+                <div class="container" style=" margin-top: -85px;">
+                    <div class="row"  style=" padding: 100px;">
+                        <div class="col-lg-5">
+
+                            
+
+
+                            <div class="pd u-s-m-b-30" >
+                                <div class="slider-fouc pd-wrap">
+                                
+                                    <div id="pd-o-initiate">
+
+
+                                        {% if i.content_image.url|slice:"-4:" == ".mp4" %}
+
+                                        <video class="embed-responsive embed-responsive-16by9" controls="controls">
+                                            <source src="{{ i.content_image.url }}" type="video/mp4">
+                                        
+                                        </video>
+                                        
+                                        
+                                                {% elif i.content_image  %}
+                                                <div class="pd-o-img-wrap" data-src="{{i.content_image.url}}">
+
+                                                    <img class="u-img-fluid" src="{{i.content_image.url}}" data-zoom-image="{{i.content_image.url}}" alt=""></div>
+                                                <div class="pd-o-img-wrap" data-src="{{i.Product_Image.url}}">
+        
+                                                    <img class="u-img-fluid" src="{{i.content_image.url}}" data-zoom-image="{{i.content_image.url}}" alt=""></div>
+                                                <div class="pd-o-img-wrap" data-src="{{i.content_image.url}}">
+        
+                                                    <img class="u-img-fluid" src="{{i.content_image.url}}" data-zoom-image="{{i.content_image.url}}" alt=""></div>
+                                               
+        
+                                                 
+        
+                                                    <div class="pd-o-img-wrap" data-src="{{i.content_image.url}}">
+                                                        
+        
+                                                        <img class="u-img-fluid" src="{{i.content_image.url}}" data-zoom-image="{{i.content_image.url}}" alt=""></div>
+                                                    <div class="pd-o-img-wrap" data-src="{{i.Product_Image.url}}">
+            
+                                                        <img class="u-img-fluid" src="{{i.content_image.url}}" data-zoom-image="{{i.content_image.url}}" alt=""></div>
+                                                    <div class="pd-o-img-wrap" data-src="{{i.content_image.url}}">
+            
+                                                        <img class="u-img-fluid" src="{{i.content_image.url}}" data-zoom-image="{{i.content_image.url}}" alt=""></div>
+                                                        
+                                    {% endif %}
+                                              
+                                    </div>
+                                   
+
+                        
+
+
+
+                                    <span class="pd-text">Click for larger zoom</span>
+                                </div>
+                                <div class="u-s-m-t-15">
+                                    <div class="slider-fouc">
+                                        <div id="pd-o-thumbnail">
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{i.content_image.url}}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{i.content_image.url}}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{i.content_image.url}}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{i.content_image.url}}" alt=""></div>
+                                            <div>
+
+                                                <img class="u-img-fluid" src="{{i.content_image.url}}" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--====== End - Product Detail Zoom ======-->
+                        </div>
+                        
+                        <div class="col-lg-7"  >
+
+                            <!--====== Product Right Side Details ======-->
+                            <div class="pd-detail" style=" padding-left: 50px;   border-radius: 20px;">
+                                <div class="nav-info" >
+                                    <div style="display: flex;">
+                                            <div ><svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                              </svg></div>
+                                            <div style="margin-left: 10px; margin-top: 10px;"><a href="{% url 'profile' i.creater.id %}" style="text-decoration: none; color: black;">
+                                                <h6 >{{ i.creater.username }} &nbsp;&nbsp;</h6></a>
+                                            </div>
+                                            <div class="company-review">
+                                                <div class="company-review">
+                              
+                                                    {% if request.user.id == username.id %}
+                                                    <a href="/settings" data-ripple=""></a>
+                                                    {% else %}
+                                                    {% if button_text == "Follow" %}
+                                                    <a class="btn" data-ripple=""><a class="btn btn btn-primary" href="{% url 'sent_friend_request_download' i.id i.creater.id   %}" type="submit" style="background-color: #ffc0cb; border: #ffc0cb;">{{button_text}}</a></a>
+                                                    {% else %}
+                                                    <a class="btn " data-ripple=""><a class="btn btn btn-primary" href="{% url 'delete_frd_download' i.id i.creater.id   %}" type="submit" style="background-color: #ffc0cb; border: #ffc0cb;">{{button_text}}</a></a>
+                                                    {% endif %}					{% endif %}
+                                                            </div>
+                                        </div>
+                                    </div>
+                               
+                                <div class="u-s-m-b-15">
+
+                                    <span class="pd-detail__label u-s-m-b-8" style="margin-top: 40px; margin-left: 20px;">Product details:</span>
+                                    <ul class="pd-detail__policy-list">
+                                        
+                                        <li> <p> <i class="fa-sharp fa-solid fa-pen-nib"></i><span style="margin-left: 10px;">{{ i.title }}</span></p></li>
+                                        <li> <p > <i class="fa-solid fa-pencil"></i> <span style="margin-left: 10px;">{{ i.content_text }}</span></p></li>
+                                        <li> <p><i class="fa-solid fa-book-open"></i><span style="margin-left: 10px;">{{ i.creater.category }}</span></p> </li>
+                                    </ul>
+
+                                   
+                                </div>
+                                
+                                
+                                
+                               
+                                <div class="u-s-m-b-15" style="margin-top: 100px;">
+                                    
+                                       
+                                            <div class="u-s-m-b-15">
+                                                {% if i.status == "sale" %}
+                                                   
+                                                <button  type="submit" class="btn btn-success">
+                                                    <i class="fa-sharp fa-solid fa-circle-down"></i> <a style="color: white;text-decoration: none;" href="{% url 'product_detail' i.id i.creater.id %}">Download</a>
+                                                    
+                                                </button>
+                                                {% else %}
+                                                <button onclick="downloadItem('{{ i.content_image.url }}')" type="submit" class="btn btn-success">
+                                                    <i class="fa-sharp fa-solid fa-circle-down"></i> Download
+                                                    
+                                                </button>
+
+                                                {% endif %}
+
+
+                                                <!-- <button style="background-color:rgba(255, 132, 0, 0.953) ; color: #fff; border:rgba(255, 132, 0, 0.953) ; border-radius: 10px; "  stclass="btn btn--e-brand-b-2" >
+                                                     <a  style="color:#fff; border:rgba(255, 132, 0, 0.953) ;" href=" {% url 'checkout' %}"  class="btn btn--e-brand-b-2">Buy</a>
+                                                    </div></button> -->
+                                        </div>
+                                 
+                                </div>
+                               
+                                
+                            </div>
+                            
+                           
+                        </div>
+
+
+
+                        <div >
+                            <div class="pd-detail__inline" style="display: flex;"  >
+    
+                                              
+                                <div class="u-s-m-b-15" style="display: flex;" >
+                                    <div class="pd-detail__rating gl-rating-style" ><i style="font-size: 25px;" class="fas fa-star"></i><i style="font-size: 25px;" class="fas fa-star"></i><i style="font-size: 25px;" class="fas fa-star"></i><i style="font-size: 25px;" class="fas fa-star"></i><i style="font-size: 25px;" class="fas fa-star-half-alt"></i>
+
+                                        <span class="pd-detail__review u-s-m-l-4">
+
+                                            <a data-click-scroll="#view-review">{{ rew_count }} Reviews</a></span></div>
+                                </div>
+                                <div style="display: flex; margin-left: 20px;">
+                                   <!-- <a href="href="/add_to_wish/{{ i.id }}"" style="border: none;  text-decoration: none; color: #535353;"> <div style="display: flex; width: 160px; height: 30px; background-color: #e7e7e7; border-radius: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="padding-top: 4px;" width="22" height="22" fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+                                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                      </svg>
+                                      <p style="margin-left: 5px;">add to collection</p>
+                                    </div></a> -->
+                                    <a class="shareBtn" onclick="openModal('{{ post.id }}')" style="border: none;  text-decoration: none; color: #535353;">
+                                    <div style="margin-left: 10px; display: flex; width: 100px; height: 30px; background-color: #e7e7e7; border-radius: 5px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="padding-top: 4px;" width="22" height="22" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                                            <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                                          </svg>
+                                          <p style="margin-left: 5px;">share</p>
+                                       
+                                    </div></a>
+                                </div>
+    
+                                </div>
+
+                                
+                        </div>
+
+
+
+                    </div>
+                    
+                </div>
+            </div>
+
+          
+    
+
+        {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
+    <script>
+        window.ga = function() {
+            ga.q.push(arguments)
+        };
+        ga.q = [];
+        ga.l = +new Date;
+        ga('create', 'UA-XXXXX-Y', 'auto');
+        ga('send', 'pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js' %" async defer></script>
+
+    <!--====== Vendor Js ======-->
+    <script src="{% static 'vendor.js' %}"></script>
+
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+
+    <!--====== jQuery Shopnav plugin ======-->
+    <script src="{% static 'jquery.shopnav.js' %}"></script>
+
+    <!--====== App ======-->
+    <script src="{% static 'app.js' %}"></script>
+    <script>
+        function downloadItem(fileUrl) {
+            // Create an <a> element with the download link
+            var link = document.createElement('a');
+            link.href = fileUrl;
+            link.download = fileUrl.split('/').pop();
+            document.body.appendChild(link);
+    
+            // Trigger the download and remove the <a> element
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+    <script>
+        function openModal(postId) {
+        // Get the corresponding modal popup
+        var modal = document.getElementById("shareModal" + postId);
+      
+        // Get the <span> element that closes the modal popup
+        var span = modal.querySelector(".close");
+      
+        // Get the URL input element and copy button
+        var urlInput = modal.querySelector("#urlInput" + postId);
+        var copyBtn = modal.querySelector("#copyBtn" + postId);
+      
+        // Set the URL value
+        urlInput.value = "http://gizshare.waywedesign.in/post_comment/" + postId;
+      
+        // When the user clicks the share button, open the modal popup
+        modal.style.display = "block";
+      
+        // When the user clicks the close button, close the modal popup
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+      
+        // When the user clicks anywhere outside of the modal popup, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      
+        // When the user clicks the copy button, copy the URL to clipboard
+        copyBtn.onclick = function() {
+          // Select the URL input text
+          urlInput.select();
+          urlInput.setSelectionRange(0, 99999); // For mobile devices
+      
+          // Copy the URL to clipboard
+          document.execCommand("copy");
+      
+          // Change the copy button text to "Copied!"
+          copyBtn.innerHTML = "Copied!";
+        }
+      }
+      
+       </script>
+         <script>
+          function shareOnFacebook(event, postUrl) {
+            event.preventDefault();
+            const postTitle = encodeURI("Hi everyone, please check this out: ");
+            const url = `https://www.facebook.com/sharer.php?u=${postUrl}&quote=${postTitle}`;
+            window.open(url, "_blank");
+          }
+        
+          function shareOnTwitter(event, postUrl) {
+            event.preventDefault();
+            const postTitle = encodeURI("Hi everyone, please check this out: ");
+            const url = `https://twitter.com/share?url=${postUrl}&text=${postTitle}`;
+            window.open(url, "_blank");
+          }
+        
+          function shareOnLinkedIn(event, postUrl) {
+            event.preventDefault();
+            const postTitle = encodeURI("Hi everyone, please check this out: ");
+            const url = `https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`;
+            window.open(url, "_blank");
+          }
+        
+          function shareOnWhatsApp(event, postUrl) {
+            event.preventDefault();
+            const postTitle = encodeURI("Hi everyone, please check this out: ");
+            const url = `https://wa.me/?text=${postTitle} ${postUrl}`;
+            window.open(url, "_blank");
+          }
+        </script>
+
+</body>
+</html>

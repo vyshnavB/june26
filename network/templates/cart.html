@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="{% static 'images/favicon.png' %}" rel="shortcut icon">
+    <title>gizshare</title>
+
+    <!--====== Google Font ======-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--====== Vendor Css ======-->
+    <link rel="stylesheet" href="{% static 'vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    <!--====== Utility-Spacing ======-->
+    <link rel="stylesheet" href="{% static 'utility.css' %}">
+
+    <!--====== App ======-->
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/2810edf5c9.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: #eeeeee;">
+    <style>
+        .checkbox-wrapper-46 input[type="checkbox"] {
+          display: none;
+          visibility: hidden;
+        }
+      
+        .checkbox-wrapper-46 .cbx {
+          margin: auto;
+          -webkit-user-select: none;
+          user-select: none;
+          cursor: pointer;
+        }
+        .checkbox-wrapper-46 .cbx span {
+          display: inline-block;
+          vertical-align: middle;
+          transform: translate3d(0, 0, 0);
+        }
+        .checkbox-wrapper-46 .cbx span:first-child {
+          position: relative;
+          width: 18px;
+          height: 18px;
+          border-radius: 3px;
+          transform: scale(1);
+          vertical-align: middle;
+          border: 1px solid #9098A9;
+          transition: all 0.2s ease;
+        }
+        .checkbox-wrapper-46 .cbx span:first-child svg {
+          position: absolute;
+          top: 3px;
+          left: 2px;
+          fill: none;
+          stroke: #FFFFFF;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-dasharray: 16px;
+          stroke-dashoffset: 16px;
+          transition: all 0.3s ease;
+          transition-delay: 0.1s;
+          transform: translate3d(0, 0, 0);
+        }
+        .checkbox-wrapper-46 .cbx span:first-child:before {
+          content: "";
+          width: 100%;
+          height: 100%;
+          background: #506EEC;
+          display: block;
+          transform: scale(0);
+          opacity: 1;
+          border-radius: 50%;
+        }
+        .checkbox-wrapper-46 .cbx span:last-child {
+          padding-left: 8px;
+        }
+        .checkbox-wrapper-46 .cbx:hover span:first-child {
+          border-color: #506EEC;
+        }
+      
+        .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child {
+          background: #506EEC;
+          border-color: #506EEC;
+          animation: wave-46 0.4s ease;
+        }
+        .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child svg {
+          stroke-dashoffset: 0;
+        }
+        .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child:before {
+          transform: scale(3.5);
+          opacity: 0;
+          transition: all 0.6s ease;
+        }
+      
+        @keyframes wave-46 {
+          50% {
+            transform: scale(0.9);
+          }
+        }
+      </style>
+        <div class="container"  >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #fff;" >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}"><img src="../../static/Images/logo.png" alt=""></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+         
+          <div class="collapse navbar-collapse" id="navbarScroll">
+
+        <form action="{% url 'search' %}"  class="d-flex input-group" method="GET" style="align-content: right;">
+            <div class="input-group">
+                {% if not hide_username %}
+                <input type="text" name="q" class="form-control" placeholder="search">
+                
+                {% endif %}
+                <div class="input-group-append">
+                    <button type="submit" style="border: none;"><span class="input-group-text" id="basic-addon2"><span class="material-symbols-outlined">
+                        search
+
+                    </span></span></button>
+                </div>
+            </div>
+        </form>
+
+        <div><ul style="display: flex; padding-top: 25px;">
+            <li style="list-style: none;">
+                <div class="notification" >
+                   <a href="{% url 'index' %}"><span class="material-symbols-outlined">
+                    house
+                    </span></a> 
+                    
+                    </div>
+                    <!-- <h6 style="font-size: 11px; margin-left: 4px; margin-top: 2px;">Home</h6> -->
+            </li>
+            <li style="list-style: none; padding-left: 15px;">
+                <div class="notification">
+               <a href="{% url 'notification'  %}"><span class="material-symbols-outlined">
+                notifications
+            </span></a> 
+                
+                <span class="badge">{{ dd }}</span>
+                
+                </div>
+                <!-- <h6 style="font-size: 11px; margin-top: 2px; margin-left: -5px;">Notifications</h6> -->
+           </li>&nbsp;
+            <li style="list-style: none; padding-left: 15px; margin-left: -8px;"><div class="notification">
+                <a href="{% url 'cart' %}"><span class="material-symbols-outlined">
+                  local_mall
+                  </span></a>
+                <span class="badge">{{ crt_count }}</span>
+                </div>
+                <h6 style="font-size: 11px; margin-top: 2px; margin-left: 7px;"></h6></li>
+        </ul>
+            </div>
+
+          
+
+
+              <div class="d-flex align-items-center nav-profile">
+
+                <div class="nav-info">
+                    <a href="{% url 'profile' user.id %}" style="text-decoration: none; color: black;">
+                    <h6 >{{user.username}} &nbsp;&nbsp;</h6></a>
+                </div>
+                <div class="nav-img">
+                    {% if user.is_authenticated %}
+                   
+                    <a href="{% url 'profile' user.id %}">               
+                       
+                        <div class="nav-profilepic" style="float: left; background-image: url(../media/{{user.profile_pic}})"></div>
+                    </a>
+
+                    {% endif %}
+                </div>
+                
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="app-content" style="background-color: #fff; border-radius: 20px ;">
+    <div class="scroll-page">
+    <div class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+    <div class="table-responsive">
+    <table class="table-p">
+    <tbody>
+     {% for i in crt %}
+     <tr>
+     <td>
+      <div class="table-p__box">
+         <div class="table-p__img-wrap">
+          <img class="u-img-fluid" src="{{ i.product.content_image.url }}" alt=""></div>
+             <div class="table-p__info">
+             <span class="table-p__name">
+
+                                                                <a style="text-decoration: none;" href="">{{ i.product.content_image }}</a></span>
+
+                                                            <!-- <span class="table-p__category">
+
+                                                                <a href="shop-side-version-2.html">{{ i.product.content_text }}</a></span> -->
+                                                            <ul class="table-p__variant-list">
+                                                                <!-- <li>
+
+                                                                    <span>Size: 22</span></li>
+                                                                <li>
+
+                                                                    <span>Color: Red</span></li> -->
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+
+                                                    <span class="table-p__price">Rs.  {{ i.product.Product_Price }}</span></td>
+                                                <td>
+                                                    <div class="table-p__input-counter-wrap">
+
+                                                        <!--====== Input Counter ======-->
+                                                        <div class="input-counter">
+
+                                                            <!-- <span style="margin-top: 17px;" class="input-counter__minus fas fa-minus"></span> -->
+
+                                                            <input class="input-counter__text input-counter--text-primary-style" type="text" value="{{i.product_qty}}" data-min="1" data-max="1000">
+
+                                                            <!-- <span style="margin-top: 17px;" class="input-counter__plus fas fa-plus"></span></div> -->
+                                                        <!--====== End - Input Counter ======-->
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="table-p__del-wrap">
+                                                      
+
+                                                      <b> <a class="btn btn-success"  style="text-decoration: none;color: white;border-radius: 12px;">{{ i.status }}</a></b>&nbsp;&nbsp;
+                                                      <a class="far fa-trash-alt table-p__delete-link" href="{% url 'remove_cart' i.id %}"></a></div>
+                                                </td>
+                                                <!-- <td>
+                                                  
+                                                    <div class="table-p__del-wrap">
+
+                                                        <a class="far fa-trash-alt table-p__delete-link" href="#"></a>
+                                                    </div>
+                                                </td> -->
+                                            </tr>
+                                            <!--====== End - Row ======-->
+
+
+                                           {% endfor %}
+                                        
+
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="route-box">
+                                    
+                                    <!-- <div class="route-box__g2">
+
+                                        <a class="route-box__link" href=""><i class="fas fa-trash"></i>
+
+                                            <span>CLEAR CART</span></a>
+
+                                        <a class="route-box__link" href=""><i class="fas fa-sync"></i>
+
+                                            <span>UPDATE CART</span></a></div> -->
+                                </div>
+                        </div>
+                    </div>
+   
+ 
+                    <div class="container">
+                    <div class="f-cart" >
+                        <div class="row">
+                         <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                         <div class="f-cart__pad-box">
+                                        <form action="" method="POST">{% csrf_token %}
+                                                <h1 class="gl-h1">ESTIMATE SHIPPING AND TAXES</h1>
+
+                                                <span class="gl-text u-s-m-b-30">Enter your destination to get a shipping estimate.</span>
+                                                
+                                                <div class="u-s-m-b-30">
+
+                                                    <label class="gl-label" for="shipping-zip">ZIP/POSTAL CODE *</label>
+
+                                                    <input class="input-text input-text--primary-style" type="text" id="shipping-zip"  name="zip" placeholder="Zip/Postal Code"></div>
+                                                <div class="u-s-m-b-30">
+                                                    {% for message in messages %}
+                                                <h6 class="text-center alert alert-danger mt-5" style=" color: rgb(255, 0, 0); font-size: 15px; ">
+                                                 
+                                                    {{ message }}
+                                                            
+                                                         </h6>
+                                                     {% endfor %}
+                                            </div>
+                                                <center>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                                        check
+                                                      </button>
+                                                    </div>
+                                                </center>
+                                                <span class="gl-text">Note: There are some countries where free shipping is available otherwise our flat rate charges or country delivery charges will be apply.</span>
+                                                
+                                        </form>
+                                        
+
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                            <div class="f-cart__pad-box">
+                                                <h1 class="gl-h1">NOTE</h1>
+
+                                                <span class="gl-text u-s-m-b-30">Add Special Note About Your Product</span>
+                                                <div>
+
+                                                    <label for="f-cart-note"></label><textarea class="text-area text-area--primary-style" id="f-cart-note"></textarea></div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                            <div class="f-cart__pad-box">
+                                                <div class="u-s-m-b-30">
+                                                    <table class="f-cart__table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>SHIPPING</td>
+                                                                <td>Rs. {{shipping}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>TAX</td>
+                                                                <td>0.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>SUBTOTAL</td>
+                                                                <td>Rs. {{ sub_total}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>GRAND TOTAL</td>
+                                                                <td>Rs {{grand_total}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                                <div class="checkbox-wrapper-46">
+                                                    <h6> <li>where you want to use it</li> </h6>
+                                                    <input class="inp-cbx" id="cbx-46" type="checkbox" >
+                                                    <label class="cbx" for="cbx-46"><span>
+                                                      <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                                      </svg></span><span>Personal</span>
+                                                    </label>
+                                                    <input class="inp-cbx" id="cbx-47" type="checkbox" >
+                                                    <label class="cbx" for="cbx-47"><span>
+                                                      <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                                      </svg></span><span>Research</span>
+                                                    </label>
+                                                  </div>
+                                                  <div class="checkbox-wrapper-46" style="margin-top: 20px; margin-bottom: 10px; ">
+                                                   
+                                                    <input class="inp-cbx" id="cbx-48" type="checkbox" >
+                                                    <label class="cbx" for="cbx-48"><span>
+                                                      <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                                      </svg></span><span>Agree to Terms and Conditions</span>
+                                                    </label>
+                                                    
+                                                  </div>
+
+
+                                                <center>
+                                                <div>
+                                                    {% if sub_total == 0 %}
+                                                    <a class="btn btn--e-brand-b-2"  style="color: #ffff; background-color: #68c091; border: #32a063;"  >PROCEED TO CHECKOUT</a>
+                                                {% else %}
+                                                    <a class="btn btn--e-brand-b-2" href="{% url 'checkout' %}" style="color: #ffff; background-color: #17bf63; border: #17bf63;" >PROCEED TO CHECKOUT</a>
+                                               {% endif %}
+                                               </div>
+                                                </center>
+                                            </div>
+                                        </div>
+                                    
+                    </div>
+                    </div>
+                    </div>
+
+        </div>
+    </div>
+        </div>
+
+
+    <script>
+        window.ga = function() {
+            ga.q.push(arguments)
+        };
+        ga.q = [];
+        ga.l = +new Date;
+        ga('create', 'UA-XXXXX-Y', 'auto');
+        ga('send', 'pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js' %}" async defer></script>
+
+    <!--====== Vendor Js ======-->
+    <script src="{% static 'js/vendor.js' %}"></script>
+
+    <!--====== jQuery Shopnav plugin ======-->
+    <script src="{% static 'js/jquery.shopnav.js' %}"></script>
+
+    <!--====== App ======-->
+    <script src="{% static 'js/app.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexus | Login</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://kit.fontawesome.com/2810edf5c9.js" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+</head>
+<body>
+  <style>
+    .container{
+            max-width: 640px;
+            font-size: 14px;
+            
+        }
+        ul.cbox-tags{
+            list-style: none;
+            padding: 20px;
+        }
+        ul.cbox-tags li{
+            display: inline;
+        }
+        ul.cbox-tags li label{
+            display: inline-block;
+            background-color: #fff;
+            margin-top: 10px;
+            color: #000;
+            border-radius: 25px;
+            white-space: nowrap;
+            user-select: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        /* ul.cbox-tags li label::after{
+            display: inline-block;
+            font-style: normal;
+            text-rendering: auto;
+            font-family: "FontAwesome";
+            font-weight: 900;
+            font-size: 15px;
+            padding: 2px 6px 2px 2px;
+            content: "\f067";
+            transition: transform 0.3s ease-in-out;
+            margin-left: 10px;
+            color: #0A66C2;
+        }
+        ul.cbox-tags li input[type="checkbox"]:checked + label::after{
+            content: "\f00c";
+            margin-left: 10px;
+            transition: transform 0.3s ease-in-out;
+            color: #028d22;
+        } */
+        ul.cbox-tags li input[type="checkbox"]:checked + label{
+            border: .5px solid #B8E2EB;
+            background-color: #B8E2EB;
+            color: #000;
+            transition: all 0.2s;
+        }
+        ul.cbox-tags li input[type="checkbox"]{
+            position: absolute;
+            opacity: 0;
+        }
+  </style>
+  
+    <section class="login-wrapper interest-wrapper">
+        <aside class="form-block">
+            <div class="bg-white form-bg">
+                <div class="log-header">
+                    <h4>explore topics </h4>
+                    <span>Pick the 3 to 9 topics you want to see in your home feed. Don’t worry You can  modify it later</span>
+                </div>
+                <form>
+                    <div class="form-group search-block">
+
+                        <input type="text" class="form-ctrl" name="" id="" placeholder="Search">
+                        <span class="material-symbols-outlined">
+                            search
+                            </span>
+                    </div>
+                    <div class="container" >
+                      <ul class="cbox-tags">
+
+                        <div style="display: flex; ">
+                        {% for intr in intr %}
+                        {% if intr.intrest_name == "#Article" %}
+                          <li> <input type="checkbox" class="chkbx" id="checkbox1"   >
+                          <label for="checkbox1">
+                           {% if button_texta == "Follow" %}
+                          
+                            <a class="" href="{% url 'intrest_follow' intr.id %} "class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;margin-left: 30px;">#Article</a>
+                            {% else %}
+                            <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black; ">#Article</a>
+                            {% endif %}	
+                          </label></li>
+                          {% endif %}
+                          {% endfor %}
+                       
+                        {% for intr in intr %}
+                        {% if intr.intrest_name == "#Market Research" %}
+                          <li><input type="checkbox" class="chkbx" id="checkbox2" >
+                          <label for="checkbox2">
+                           {% if button_textf == "Follow" %}
+                            <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Market Research</a>
+                            {% else %}
+                            <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black;">#Market Research</a>
+  
+                            {% endif %}	
+                          </label></li>
+                          {% endif %}
+                          {% endfor %}
+  
+  
+                          {% for intr in intr %}
+                          {% if intr.intrest_name == "#Case Study" %}
+                            <li><input type="checkbox" class="chkbx" id="checkbox3"   >
+                            <label for="checkbox3">
+                             {% if button_textc == "Follow" %}
+                              <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Case Study</a>
+                              {% else %}
+                              <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black;">#Case Study</a>
+  
+                              {% endif %}	
+                            </label></li>
+                            {% endif %}
+                            {% endfor %}
+                          </div>
+                          <div style="display: flex; ">
+  
+                            {% for intr in intr %}
+                            {% if intr.intrest_name == "#Book" %}
+                              <li><input type="checkbox" class="chkbx" id="checkbox4"   >
+                              <label for="checkbox4">
+                               {% if button_textb == "Follow" %}
+                                <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Book</a>
+                                {% else %}
+                                <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black;">#Book</a>
+  
+                                {% endif %}	
+                              </label></li>
+                              {% endif %}
+                              {% endfor %}
+  
+  
+  
+                              {% for intr in intr %}
+                              {% if intr.intrest_name == "#Education" %}
+                                <li><input type="checkbox" class="chkbx" id="checkbox5"   >
+                                <label for="checkbox5">
+                                 {% if button_textd == "Follow" %}
+                                  <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Education</a>
+                                  {% else %}
+                                  <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black;">#Education</a>
+  
+                                  {% endif %}	
+                                </label></li>
+                                {% endif %}
+                                {% endfor %}
+  
+  
+  
+  
+                                {% for intr in intr %}
+                                {% if intr.intrest_name == "#Interviews" %}
+                                  <li><input type="checkbox" class="chkbx" id="checkbox6"   >
+                                  <label for="checkbox6">
+                                   {% if button_texte == "Follow" %}
+                                    <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Interviews</a>
+                                    {% else %}
+                                    <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black;">#Interviews</a>
+  
+                                    {% endif %}	
+                                  </label></li>
+                                  {% endif %}
+                                  {% endfor %}
+
+                                  {% for intr in intr %}
+                                      {% if intr.intrest_name == "#Poem" %}
+                                        <li><input type="checkbox" class="chkbx" id="checkbox8"   >
+                                        <label for="checkbox8">
+                                         {% if button_texth == "Follow" %}
+                                          <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Poem</a>
+                                          {% else %}
+                                          <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black;text-decoration: none;color: black;">#Poem</a>
+  
+                                          {% endif %}	
+                                        </label></li>
+                                        {% endif %}
+                                        {% endfor %} 
+
+
+
+                                  
+                          </div>
+                          <div style="display: flex; ">
+  
+  
+  
+                               
+  
+  
+                                    {% for intr in intr %}
+                                    {% if intr.intrest_name == "#Observation" %}
+                                      <li><input type="checkbox" class="chkbx" id="checkbox7"   >
+                                      <label for="checkbox7">
+                                       {% if button_textg == "Follow" %}
+                                        <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Observation</a>
+                                        {% else %}
+                                        <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black; text-decoration: none;color: black;">#Observation</a>
+  
+                                        {% endif %}	
+                                      </label></li>
+                                      {% endif %}
+                                      {% endfor %}
+  
+                                      
+                                         
+
+
+
+                                        {% for intr in intr %}
+                                        {% if intr.intrest_name == "#Survey" %}
+                                          <li><input type="checkbox" class="chkbx" id="checkbox9"   >
+                                          <label for="checkbox9">
+                                           {% if button_texti == "Follow" %}
+                                            <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Survey</a>
+                                            {% else %}
+                                            <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black;text-decoration: none;color: black;">#Survey</a>
+                                            {% endif %}	
+                                          </label></li>
+                                          {% endif %}
+                                          {% endfor %}    
+
+
+                                          
+                                        {% for intr in intr %}
+                                        {% if intr.intrest_name == "#Work & Business" %}
+                                          <li><input type="checkbox" class="chkbx" id="checkbox11"   >
+                                          <label for="checkbox11">
+                                           {% if button_textj == "Follow" %}
+                                            <a href="{% url 'intrest_follow' intr.id %}" class=" btn-primary" style="background-color: rgb(255, 255, 255);text-decoration: none;color: black;">#Work & Business</a>
+                                            {% else %}
+                                            <a href="{% url 'intrest_unfollow' intr.id %}" class="btn btn btn-primary" style="background-color: rgb(121, 194, 236);border-radius: 15px;border-color: black;text-decoration: none;color: black;">#Work & Business</a>
+                                            {% endif %}	
+                                          </label></li>
+                                          {% endif %}
+                                          {% endfor %}    
+
+                                        </div>
+                      </ul>
+                    </div>
+                    <div class="selection-wrapper">
+                      <input style="width: 18px; border: none; font-size: 14px ; color: rgb(65, 65, 65);" type="text" id="count" placeholder="">
+                        <span> topics selected</span>
+                        <button class="btn btn-primary">
+                            <a href="{% url 'index' %}" style="text-decoration: none;color: white;">Save</a>
+                            
+                        </button>
+                    </div>
+                  
+                
+                           </form>
+                
+            </div>
+
+
+
+        </aside>
+    </section>
+
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.chkbx').click(function(){
+                var text="";
+                $('.chkbx:checked').each(function(){
+                    text+=$(this).val()+ ',';
+
+                });
+                text=text.substring(0,text.length-1);
+                $('selectedtext').val(text)
+                var count = $("[type='checkbox']:checked").length;
+                $ ('#count').val($("[type='checkbox']:checked").length);
+
+            });
+
+        });
+    </script>
+</body>
+</html>

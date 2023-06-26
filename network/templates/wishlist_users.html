@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% trans "Create New Interest" %}</title>
+</head>
+<body>
+  <h1>{% trans "Create New Interest" %}</h1>
+  <form method="POST" action="{% url 'intrest_create' %}">
+    {% csrf_token %}
+    <label for="intrest_name">{% trans "Interest Name:" %}</label>
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+    <input type="text" name="intrest_name" >
+    <br>
+    <label >parent</label>
+    <select name="pran">
+      <option value="">empty</option>
+      {% for i in intrests %}
+      <option value="{{i.id}}" >{{i.intrest_name}}</option>
+      {% endfor %}
+    </select>
+   
+    <br>
+ 
+  
+    <br>
+    <input type="submit" >
+  </form>
+</body>
+</html>

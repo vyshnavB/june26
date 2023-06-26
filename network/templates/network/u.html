@@ -1,0 +1,34 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+{% load static %}
+
+<div class="container">
+  <div class="row mt-4">
+      <div class="col-md-8 offset-md-2">
+          <h1 class="text-center mb-4">Search Results</h1>
+          <div class="mt-4">
+              {% if results %}
+              {% for result in results %}
+              <div class="card mb-3">
+                  <div class="card-header">{{ result.username }}</div>
+                  <div class="card-body">
+                      <h5 class="card-title">{{ result.pagename }} {{ result.intrest_name }}</h5>
+                      <p class="card-text">{{ result.description }}</p>
+                      <a href="" class="btn btn-primary">View Profile</a>
+                  </div>
+              </div>
+              {% endfor %}
+              {% else %}
+              <p>No results found.</p>
+              {% endif %}
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
